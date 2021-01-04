@@ -46,7 +46,7 @@ public enum InvitationError: Error {
 public protocol InvitationStorage {
     func createShortLink() -> AnyPublisher<URL, InvitationError>
     func register(keys: CollectionDifference<String>)
-    func create(key: String, invitation: InvitationInfo) -> AnyPublisher<InvitationState, InvitationError>
+    func create(key: String, invitation: InvitationInfo) -> AnyPublisher<Void, InvitationError>
     func read(with: URL) -> AnyPublisher<InvitationState, InvitationError>
     func update(key: String, params: [String: Any]) -> AnyPublisher<Void, InvitationError>
     func delete(key: String) -> AnyPublisher<Void, InvitationError>
