@@ -35,6 +35,8 @@ public struct InvitationInfo: Codable {
 
 // MARK: - ERRORS
 public enum InvitationError: Error {
+    case invitationCreationError
+    case invitationUpdateError
     case invitationDecodingError
     case invitationEncodingError
     case invitationDataNotFoundError
@@ -43,6 +45,7 @@ public enum InvitationError: Error {
 // MARK: - PROTOCOL
 public protocol InvitationStorage {
     func createShortLink() -> AnyPublisher<URL, InvitationError>
+    func register(keys: CollectionDifference<String>)
     func create(key: String, invitation: InvitationInfo) -> AnyPublisher<InvitationState, InvitationError>
     func read(with: URL) -> AnyPublisher<InvitationState, InvitationError>
     func update(key: String, params: [String: Any]) -> AnyPublisher<Void, InvitationError>
