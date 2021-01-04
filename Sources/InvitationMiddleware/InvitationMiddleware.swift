@@ -15,8 +15,13 @@ public enum InvitationAction {
 }
 // MARK: - STATE
 public struct InvitationState: Codable {
-    public let key: String
-    public var invitation: InvitationInfo?
+    public let list: [String: InvitationInfo]
+    
+    public init(list: [String: InvitationInfo]) {
+        self.list = list
+    }
+    
+    public static let empty = InvitationState(list: [:])
 }
 
 /// The "context" for the invitation that was sent for :
