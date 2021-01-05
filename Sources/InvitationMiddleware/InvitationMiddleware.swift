@@ -14,7 +14,7 @@ public enum InvitationAction {
     case stateChanged(InvitationState)
 }
 // MARK: - STATE
-public struct InvitationState: Codable {
+public struct InvitationState: Equatable, Codable {
     public let list: [String: InvitationInfo]
     
     public init(list: [String: InvitationInfo]) {
@@ -27,7 +27,7 @@ public struct InvitationState: Codable {
 /// The "context" for the invitation that was sent for :
 ///   * a user to join a new family
 ///   * or a family to join a carpool
-public struct InvitationInfo: Codable {
+public struct InvitationInfo: Equatable, Codable {
     public enum InvitationType: String, Codable {
         case family
         case carpool
