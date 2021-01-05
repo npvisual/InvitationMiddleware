@@ -43,6 +43,7 @@ public enum InvitationError: Error {
     case invitationURLCreationError
     case invitationCreationError
     case invitationUpdateError
+    case invitationDeletionError
     case invitationDecodingError
     case invitationEncodingError
     case invitationDataNotFoundError
@@ -55,7 +56,7 @@ public protocol InvitationStorage {
     func createShortLink() -> AnyPublisher<URL, InvitationError>
     func register(keys: CollectionDifference<String>)
     func create(key: String, invitation: InvitationInfo) -> AnyPublisher<Void, InvitationError>
-    func read(key: String) -> AnyPublisher<InvitationState, InvitationError>
+    func read(key: String) -> AnyPublisher<InvitationInfo, InvitationError>
     func update(key: String, params: [String: Any]) -> AnyPublisher<Void, InvitationError>
     func delete(key: String) -> AnyPublisher<Void, InvitationError>
     func changeListeners() -> AnyPublisher<InvitationState, InvitationError>
