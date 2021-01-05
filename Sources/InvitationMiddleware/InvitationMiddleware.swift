@@ -50,6 +50,8 @@ public enum InvitationError: Error {
 
 // MARK: - PROTOCOL
 public protocol InvitationStorage {
+    // Note that the short link creation might need to be extracted out of this
+    // middleware so we can keep it more streamlined and focused on its core functionality.
     func createShortLink() -> AnyPublisher<URL, InvitationError>
     func register(keys: CollectionDifference<String>)
     func create(key: String, invitation: InvitationInfo) -> AnyPublisher<Void, InvitationError>
