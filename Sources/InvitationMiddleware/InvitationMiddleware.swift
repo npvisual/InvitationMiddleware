@@ -40,6 +40,7 @@ public struct InvitationInfo: Codable {
 
 // MARK: - ERRORS
 public enum InvitationError: Error {
+    case invitationURLCreationError
     case invitationCreationError
     case invitationUpdateError
     case invitationDecodingError
