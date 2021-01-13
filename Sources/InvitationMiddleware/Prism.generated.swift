@@ -59,15 +59,34 @@ extension InvitationAction {
         self.redeemInvitation != nil
     }
 
-    public var stateChanged: Void? {
+    public var stateChanged: InvitationState? {
         get {
-            guard case .stateChanged = self else { return nil }
-            return ()
+            guard case let .stateChanged(associatedValue0) = self else { return nil }
+            return (associatedValue0)
+        }
+        set {
+            guard case .stateChanged = self, let newValue = newValue else { return }
+            self = .stateChanged(newValue)
         }
     }
 
     public var isStateChanged: Bool {
         self.stateChanged != nil
+    }
+
+    public var error: InvitationError? {
+        get {
+            guard case let .error(associatedValue0) = self else { return nil }
+            return (associatedValue0)
+        }
+        set {
+            guard case .error = self, let newValue = newValue else { return }
+            self = .error(newValue)
+        }
+    }
+
+    public var isError: Bool {
+        self.error != nil
     }
 
 }

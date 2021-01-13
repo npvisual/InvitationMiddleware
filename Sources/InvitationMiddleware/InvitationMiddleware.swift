@@ -12,6 +12,7 @@ public enum InvitationAction {
     case receiveInvitation(URL)
     case redeemInvitation
     case stateChanged(InvitationState)
+    case error(InvitationError)
 }
 // MARK: - STATE
 public struct InvitationState: Equatable, Codable {
@@ -106,6 +107,7 @@ public class InvitationMiddleware: Middleware {
                 var result: String = "success"
                 if case let Subscribers.Completion.failure(err) = completion {
                     result = "failure : " + err.localizedDescription
+                    self.output?.dispatch(.error(err))
                 }
                 os_log(
                     "State change completed with %s.",
