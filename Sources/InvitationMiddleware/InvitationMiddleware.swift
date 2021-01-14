@@ -16,13 +16,13 @@ public enum InvitationAction {
 }
 // MARK: - STATE
 public struct InvitationState: Equatable, Codable {
-    public let list: [String: InvitationInfo]
+    public let key: String
+    public let value: InvitationInfo
     
-    public init(list: [String: InvitationInfo]) {
-        self.list = list
+    public init(key: String, value: InvitationInfo) {
+        self.key = key
+        self.value = value
     }
-    
-    public static let empty = InvitationState(list: [:])
 }
 
 /// The "context" for the invitation that was sent for :
@@ -87,8 +87,6 @@ public class InvitationMiddleware: Middleware {
     private var stateChangeCancellable: AnyCancellable?
     private var operationCancellable: AnyCancellable?
     
-    private var idBuffer: [String] = []
-
     public init(provider: InvitationStorage) {
         self.provider = provider
     }
