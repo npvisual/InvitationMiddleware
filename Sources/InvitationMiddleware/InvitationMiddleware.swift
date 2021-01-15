@@ -57,7 +57,7 @@ public protocol InvitationStorage {
     func read(key: String) -> AnyPublisher<InvitationInfo, InvitationError>
     func update(key: String, params: [String: Any]) -> AnyPublisher<Void, InvitationError>
     func delete(key: String) -> AnyPublisher<Void, InvitationError>
-    func changeListeners() -> AnyPublisher<InvitationState, InvitationError>
+    func changeListener() -> AnyPublisher<InvitationState, InvitationError>
 }
 
 // MARK: - MIDDLEWARE
@@ -100,7 +100,7 @@ public class InvitationMiddleware: Middleware {
         self.getState = getState
         self.output = output
         self.stateChangeCancellable = provider
-            .changeListeners()
+            .changeListener()
             .sink { (completion: Subscribers.Completion<InvitationError>) in
                 var result: String = "success"
                 if case let Subscribers.Completion.failure(err) = completion {
