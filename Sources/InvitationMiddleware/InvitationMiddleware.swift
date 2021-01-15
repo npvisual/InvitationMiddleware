@@ -52,7 +52,7 @@ public enum InvitationError: Error {
 
 // MARK: - PROTOCOL
 public protocol InvitationStorage {
-    func register(keys: CollectionDifference<String>)
+    func register(key: String)
     func create(key: String, invitation: InvitationInfo) -> AnyPublisher<Void, InvitationError>
     func read(key: String) -> AnyPublisher<InvitationInfo, InvitationError>
     func update(key: String, params: [String: Any]) -> AnyPublisher<Void, InvitationError>
